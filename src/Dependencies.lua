@@ -18,8 +18,11 @@ require 'src/CONSTANTS'
 --a file that contains all the utility functions
 require 'src/utility'
 
---a file that contains paddle class to represent the user controllable paddle
+--a file that contains Paddle class to represent the user controllable paddle
 require 'src/Paddle'
+
+--a filr that contains Ball class to represent the ball in the game
+require 'src/Ball'
 
 --a file that contains the statemachine class to smoothly transition to/from one game state from/to another, and to avoid monolithic code in one file.
 require 'src/StateMachine'

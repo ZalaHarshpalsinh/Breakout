@@ -58,7 +58,7 @@ end
 --This function takes the whole atlas (sprite sheet) and cuts out and reuturns the different Paddle shrites (Or to say more precisely, their quads) from it.
 function GenerateQuadsPaddles(atlas)
 
-    --In a nutshell: x coordinates for the scissors
+    --In a nutshell: coordinates for the scissors
     local x = 0
     local y = 4 * TILE_HEIGHT -- There are 4 block above the point from where the paddles start 
 
@@ -74,22 +74,63 @@ function GenerateQuadsPaddles(atlas)
         --smallest paddle
         paddles[counter] = love.graphics.newQuad(x,y,2*TILE_WIDTH,TILE_HEIGHT,atlas:getDimensions())
         counter = counter + 1
+        --move scissors to left
+        x = x + 2 * TILE_WIDTH
 
         --medium paddle
-        paddles[counter] = love.graphics.newQuad(x + 2*TILE_WIDTH,y,4*TILE_WIDTH,TILE_HEIGHT,atlas:getDimensions())
+        paddles[counter] = love.graphics.newQuad(x,y,4*TILE_WIDTH,TILE_HEIGHT,atlas:getDimensions())
         counter = counter + 1
+        --move scissors to left
+        x = x + 4 * TILE_WIDTH
 
         --large paddle
-        paddles[counter] = love.graphics.newQuad(x + 6*TILE_WIDTH,y,6*TILE_WIDTH,TILE_HEIGHT,atlas:getDimensions())
+        paddles[counter] = love.graphics.newQuad(x,y,6*TILE_WIDTH,TILE_HEIGHT,atlas:getDimensions())
         counter = counter + 1
+        --move scissors to left
+        x = x + 6 * TILE_WIDTH
 
         --huge paddle
-        paddles[counter] = love.graphics.newQuad(x + 12*TILE_WIDTH,y+TILE_HEIGHT,8*TILE_WIDTH,TILE_HEIGHT,atlas:getDimensions())
+        paddles[counter] = love.graphics.newQuad(x,y+TILE_HEIGHT,8*TILE_WIDTH,TILE_HEIGHT,atlas:getDimensions())
         counter = counter + 1
 
         --move the scissors to the next colour of paddle
+        x = 0
         y = y + 2* TILE_HEIGHT
     end
 
     return paddles
+end
+
+--This function takes the whole atlas (sprite sheet) and cuts out and reuturns the different Balls' shrites (Or to say more precisely, their quads) from it.
+function GenerateQuadsBalls(atlas)
+    
+    --In a nutshell:  coordinates for the scissors
+    local x = 6*TILE_WIDTH --There are 6 block left to  the point from where the balls start
+    local y = 3 * TILE_HEIGHT -- There are 3 block above the point from where the balls start
+
+    --counter to count and maintain index for balls
+    local counter = 1
+
+    --Array to store the balls' quads
+    local balls = {}
+
+    --Iterate over 4 balls in the first row
+    for i=0,3 do
+        balls[counter] = love.graphics.newQuad(x,y,TILE_WIDTH/2,TILE_HEIGHT/2,atlas:getDimensions())
+        counter = counter + 1
+        x = x + TILE_WIDTH/2
+    end
+
+    --set scissors to next row of balls
+    x = 6 * TILE_WIDTH
+    y = 3 * TILE_HEIGHT + TILE_HEIGHT/2
+
+    --Iterate over 3 balls in the second row
+    for i=0,2 do
+        balls[counter] = love.graphics.newQuad(x,y,TILE_WIDTH/2,TILE_HEIGHT/2,atlas:getDimensions())
+        counter = counter + 1
+        x = x + TILE_WIDTH/2
+    end
+
+    return balls
 end

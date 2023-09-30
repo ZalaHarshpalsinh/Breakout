@@ -20,7 +20,7 @@ function Paddle:init()
 
     --Dimensions of the paddle 
     self.width = (self.size*2*TILE_WIDTH)
-    self.Height = TILE_HEIGHT
+    self.height = TILE_HEIGHT
 end
 
 function Paddle:update(dt)
