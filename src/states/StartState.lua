@@ -28,6 +28,15 @@ function StartState:update(dt)
     then
         self.current_option = inc_loop(self.current_option,#self.options)
     end
+
+    --If enter is pressed, change the state based on whichever option user selected
+    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+        if self.current_option == 1 then
+            gStateMachine:change('PlayState')
+        elseif self.current_option == 3 then
+            love.event.quit()
+        end
+    end
 end
 
 

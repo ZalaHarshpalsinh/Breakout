@@ -7,4 +7,11 @@ WINDOW_HEIGHT = 720
 
 --Size I consider while coding, and will be scaled to match the actual window_width/height, through push library.
 VIRTUAL_WIDTH = 432
-VIRTUAL_HEIGHT = 243 
+VIRTUAL_HEIGHT = 243
+
+--Width and Height of a single tile in the spriteSheet
+TILE_WIDTH = 16
+TILE_HEIGHT = 16
+
+--speed of the paddle
+PADDLE_SPEED = 200

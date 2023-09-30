@@ -36,6 +36,11 @@ function love.load()
         ['particle'] = love.graphics.newImage('resources/graphics/particle.png')
     }
 
+    --generating quads for all the sprites from the main texture, which will allow us to draw only a particular sprite from the entire sheet
+    gQuads = {
+        ['paddles'] = GenerateQuadsPaddles(gTextures['main']) 
+    }
+
     --load all the sound effects
     gSounds = {
         ['paddle-hit'] = love.audio.newSource('resources/sounds/paddle_hit.wav', 'static'),
@@ -57,7 +62,8 @@ function love.load()
     --creating a state machine that will handle the state trasition
     gStateMachine = StateMachine{
         ['BaseState'] = function() return BaseState() end,
-        ['StartState'] = function() return StartState() end
+        ['StartState'] = function() return StartState() end,
+        ['PlayState'] = function() return PlayState() end
     }
 
     --setting the current state to start state at the start of the game
