@@ -14,11 +14,6 @@ function LevelMaker.createMap(level)
 
     for y=1,rows do
         
-        local skipRow = math.random(1, 2) == 1 and true or false
-        if skipRow then
-            goto continue_outer
-        end 
-
         local applyAlternateSkin = math.random(1, 2) == 1 and true or false
 
         local applyGap = math.random(1, 2) == 1 and true or false
@@ -59,7 +54,6 @@ function LevelMaker.createMap(level)
 
             ::continue_inner::
         end
-        ::continue_outer::
     end
 
     if #bricks == 0 then
