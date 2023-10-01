@@ -34,7 +34,7 @@ function StartState:update(dt)
         if self.current_option == 1 then
             gStateMachine:change('ServeState',{
                 paddle = Paddle(),
-                bricks = LevelMaker.createMap(),
+                bricks = LevelMaker.createMap(4),
                 health = 3,
                 score = 0
             })

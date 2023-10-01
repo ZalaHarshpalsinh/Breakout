@@ -7,9 +7,6 @@ function Brick:init(x,y)
     self.width = 2 * TILE_WIDTH
     self.height = TILE_HEIGHT
 
-    self.skin = 1
-    self.tier = 1
-
     self.destroyed = false
 end
 

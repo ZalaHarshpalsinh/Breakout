@@ -56,7 +56,7 @@ end
 
 
 function GenerateQuadsBricks(atlas)
-    return table.slice(GenerateQuads(atlas,2*TILE_WIDTH,TILE_HEIGHT),1,21,1)
+    return table.slice(GenerateQuads(atlas,2*TILE_WIDTH,TILE_HEIGHT),1,16,1)
 end
 
 
