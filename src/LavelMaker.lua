@@ -37,21 +37,21 @@ function LevelMaker.createMap(level)
 
             local brick_x = 8+((x-1)*2*TILE_WIDTH)+((13-columns)*TILE_WIDTH)
             local brick_y = y*TILE_HEIGHT
-            local brick = Brick(brick_x,brick_y)
-            table.insert(bricks,brick)
-
+            local brick_skin
+            local brick_tier
+            
             if(applyAlternateColor and alternateFlag) then
-                brick.skin = skin2
-                brick.tier = tier2
+                brick_skin = skin2
+                brick_tier = tier2
                 alternateFlag = not alternateFlag
             else
-                brick.skin = skin1
-                brick.tier = tier1
+                brick_skin = skin1
+                brick_tier = tier1
                 alternateFlag = not alternateFlag
             end
-
+            
+            local brick = Brick(brick_x,brick_y,brick_skin,brick_tier)
             table.insert(bricks,brick)
-
             ::continue_inner::
         end
     end

@@ -57,7 +57,7 @@ function PlayState:update(dt)
 
         for i,brick in pairs(self.bricks) do
             if not brick.destroyed and self.ball:collides(brick) then
-                brick.destroyed = true;
+                brick:hit()
                 self.score = self.score + 10
 
                 if self.ball.x < brick.x  then
