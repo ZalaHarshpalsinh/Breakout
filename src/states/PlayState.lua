@@ -56,6 +56,8 @@ function PlayState:update(dt)
         end
 
         for i,brick in pairs(self.bricks) do
+
+            brick:update(dt)
             if not brick.destroyed and self.ball:collides(brick) then
                 brick:hit()
                 self.score = self.score + 10
