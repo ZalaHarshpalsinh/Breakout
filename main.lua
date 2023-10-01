@@ -40,7 +40,8 @@ function love.load()
     gQuads = {
         ['paddles'] = GenerateQuadsPaddles(gTextures['main']),
         ['balls'] = GenerateQuadsBalls(gTextures['main']),
-        ['bricks'] = GenerateQuadsBricks(gTextures['main'])
+        ['bricks'] = GenerateQuadsBricks(gTextures['main']),
+        ['hearts'] = GenerateQuadsHearts(gTextures['main'])
     }
 
     --load all the sound effects
@@ -65,7 +66,9 @@ function love.load()
     gStateMachine = StateMachine{
         ['BaseState'] = function() return BaseState() end,
         ['StartState'] = function() return StartState() end,
-        ['PlayState'] = function() return PlayState() end
+        ['PlayState'] = function() return PlayState() end,
+        ['ServeState'] = function() return ServeState() end,
+        ['GameOverState'] = function() return GameOverState() end
     }
 
     --setting the current state to start state at the start of the game
@@ -128,11 +131,6 @@ function love.keyboard.wasPressed(key)
     return love.keyboard.keysPressed[key]
 end
 
---function to display FPS on the screen
-function displayFPS()
-    --set color to green
-    love.graphics.setColor(0,1,0,1)
-    print('FPS: ' .. tostring(love.timer.getFPS()),'small', 5 , 5,VIRTUAL_WIDTH,'left')
-    love.graphics.setColor(1,1,1,1)
-end
+
+
 

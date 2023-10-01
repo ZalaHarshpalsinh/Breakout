@@ -139,3 +139,42 @@ function GenerateQuadsBalls(atlas)
 
     return balls
 end
+
+function GenerateQuadsHearts(atlas)
+    local hearts = {}
+
+    local x = 8 * TILE_WIDTH
+    local y = 3 * TILE_HEIGHT
+
+    hearts[0] = love.graphics.newQuad(x,y,TILE_WIDTH/2 + 2,TILE_HEIGHT/2 + 5,atlas:getDimensions())
+    x = x + TILE_WIDTH/2 + 2
+    hearts[1] = love.graphics.newQuad(x,y,TILE_WIDTH/2 + 2,TILE_HEIGHT/2 + 5,atlas:getDimensions())
+
+    return hearts
+end
+
+--function to display FPS on the screen
+function displayFPS()
+    --set color to green
+    love.graphics.setColor(0,1,0,1)
+    print('FPS: ' .. tostring(love.timer.getFPS()),'small', 5 , 5,VIRTUAL_WIDTH,'left')
+    love.graphics.setColor(1,1,1,1)
+end
+
+function renderHealth(health)
+    local health_x = VIRTUAL_WIDTH - 200
+
+    for i=1,health do
+        love.graphics.draw(gTextures['main'],gQuads['hearts'][0],health_x,5)
+        health_x  = health_x + TILE_WIDTH/2 + 3
+    end
+
+    for i=1,3 - health do
+        love.graphics.draw(gTextures['main'],gQuads['hearts'][1],health_x,5)
+        health_x  = health_x + TILE_WIDTH/2 + 3
+    end
+end
+
+function renderScore(score)
+    print('Score: ' .. tostring(score),'small', VIRTUAL_WIDTH - 100,5,100,'right')
+end

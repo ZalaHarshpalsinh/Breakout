@@ -32,7 +32,12 @@ function StartState:update(dt)
     --If enter is pressed, change the state based on whichever option user selected
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         if self.current_option == 1 then
-            gStateMachine:change('PlayState')
+            gStateMachine:change('ServeState',{
+                paddle = Paddle(),
+                bricks = LevelMaker.createMap(),
+                health = 3,
+                score = 0
+            })
         elseif self.current_option == 3 then
             love.event.quit()
         end

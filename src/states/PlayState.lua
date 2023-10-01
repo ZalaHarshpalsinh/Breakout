@@ -3,22 +3,21 @@
 --inherit from BaseState
 PlayState = Class{__includes = BaseState}
 
-function PlayState:init()
+function PlayState:enter(paras)
     --Create a Paddle
-    self.paddle = Paddle()
+    self.paddle = paras.paddle
 
     --create a ball with random skin out of 7 options
-    self.ball = Ball()
+    self.ball = paras.ball
 
-    self.bricks = LevelMaker.createMap()
+    self.bricks = paras.bricks
 
-    --center the ball
-    self.ball.x = VIRTUAL_WIDTH/2 - self.ball.width/2
-    self.ball.y = VIRTUAL_HEIGHT/2 - self.ball.height/2
+    self.health = paras.health
+    self.score = paras.score
 
     --give ball some random velocity
-    self.ball.dx = math.random(-200,100)
-    self.ball.dy = math.random(-200,100)
+    self.ball.dx = math.random(-200,200)
+    self.ball.dy = math.random(-200,-100)
     
     --bool to know if game is paused or not
     self.paused = false
@@ -59,6 +58,7 @@ function PlayState:update(dt)
         for i,brick in pairs(self.bricks) do
             if not brick.destroyed and self.ball:collides(brick) then
                 brick.destroyed = true;
+                self.score = self.score + 10
 
                 if self.ball.x < brick.x  then
                     self.ball.dx = -self.ball.dx
@@ -76,6 +76,24 @@ function PlayState:update(dt)
                 break
             end
         end
+
+        if self.ball.y >= VIRTUAL_HEIGHT then
+            self.health = self.health - 1
+            if self.health == 0 then
+                gStateMachine:change('GameOverState',{
+                    score = self.score
+                })
+            else
+                gStateMachine:change('ServeState',{
+                    paddle = self.paddle,
+                    bricks = self.bricks,
+                    health = self.health,
+                    score = self.score
+                })
+            end
+        end
+             
+
     end
 
     --if user presses escape take him to menu
@@ -95,6 +113,9 @@ function PlayState:render()
     for i,brick in pairs(self.bricks) do
         self.bricks[i]:render()
     end
+
+    renderHealth(self.health)
+    renderScore(self.score)
 
     --if game is paused, display Pause text
     if self.paused then
