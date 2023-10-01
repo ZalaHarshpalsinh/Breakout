@@ -40,6 +40,6 @@ end
 
 function Paddle:render()
 
-    --drawing the Paddle using main spritesheet texture and pre-claculated quads
+    --drawing the Paddle using main spritesheet texture and pre-claculated quads 
     love.graphics.draw(gTextures['main'],gQuads['paddles'][(self.skin-1)*4 + self.size],self.x,self.y)
 end

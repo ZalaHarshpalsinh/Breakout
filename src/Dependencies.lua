@@ -24,6 +24,9 @@ require 'src/Paddle'
 --a filr that contains Ball class to represent the ball in the game
 require 'src/Ball'
 
+require 'src/LavelMaker'
+require 'src/Brick'
+
 --a file that contains the statemachine class to smoothly transition to/from one game state from/to another, and to avoid monolithic code in one file.
 require 'src/StateMachine'
 

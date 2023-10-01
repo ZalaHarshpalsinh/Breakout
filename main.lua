@@ -39,7 +39,8 @@ function love.load()
     --generating quads for all the sprites from the main texture, which will allow us to draw only a particular sprite from the entire sheet
     gQuads = {
         ['paddles'] = GenerateQuadsPaddles(gTextures['main']),
-        ['balls'] = GenerateQuadsBalls(gTextures['main'])
+        ['balls'] = GenerateQuadsBalls(gTextures['main']),
+        ['bricks'] = GenerateQuadsBricks(gTextures['main'])
     }
 
     --load all the sound effects

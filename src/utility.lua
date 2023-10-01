@@ -30,7 +30,7 @@ function GenerateQuads(atlas,tileWidth,tileHeight)
         for x=0,columns-1 do
 
             --generate the quad and store it
-            quads[counter] = love.graphics.newQuad(x*tileWidth, y *tileHeight, tileWidth, tileHeight, atlas:getDimentions())
+            quads[counter] = love.graphics.newQuad(x*tileWidth, y *tileHeight, tileWidth, tileHeight, atlas:getDimensions())
 
             --increment the counter
             counter = counter + 1
@@ -52,6 +52,11 @@ function table.slice(tbl,first,last,step)
     end
 
     return slices
+end
+
+
+function GenerateQuadsBricks(atlas)
+    return table.slice(GenerateQuads(atlas,2*TILE_WIDTH,TILE_HEIGHT),1,21,1)
 end
 
 
