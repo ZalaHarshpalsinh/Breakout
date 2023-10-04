@@ -34,9 +34,10 @@ function StartState:update(dt)
         if self.current_option == 1 then
             gStateMachine:change('ServeState',{
                 paddle = Paddle(),
-                bricks = LevelMaker.createMap(4),
+                bricks = LevelMaker.createMap(1),
                 health = 3,
-                score = 0
+                score = 0,
+                level = 1
             })
         elseif self.current_option == 3 then
             love.event.quit()

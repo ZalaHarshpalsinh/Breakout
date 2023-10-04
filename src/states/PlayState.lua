@@ -14,7 +14,10 @@ function PlayState:enter(paras)
 
     self.health = paras.health
     self.score = paras.score
+    self.level = paras.level
 
+    self.active_bricks = #self.bricks
+    
     --give ball some random velocity
     self.ball.dx = math.random(-200,200)
     self.ball.dy = math.random(-200,-100)
@@ -58,14 +61,26 @@ function PlayState:update(dt)
         for i,brick in pairs(self.bricks) do
 
             brick:update(dt)
+
             if not brick.destroyed and self.ball:collides(brick) then
+
                 brick:hit()
                 self.score = self.score + 10
 
-                if self.ball.x < brick.x  then
+                if(brick.destroyed) then self.active_bricks = self.active_bricks -1 end
+                if(self.active_bricks == 0) then 
+                    gStateMachine:change('LevelCompleteState',{
+                        level = self.level,
+                        paddle = self.paddle,
+                        health = self.health,
+                        score = self.score
+                    })
+                end
+                if self.ball.x + 10  < brick.x  then
                     self.ball.dx = -self.ball.dx
-                    self.ballx = brick.x - self.ball.width
-                elseif self.ball.x+self.ball.width > brick.x + brick.width  then
+                    self.ballx = brick.x - self.ball.width 
+                elseif self.ball.x+self.ball.width - 10
+                  > brick.x + brick.width  then
                     self.ball.dx = -self.ball.dx
                     self.ball.x = brick.x+brick.width
                 elseif self.ball.y < brick.y then
@@ -73,7 +88,7 @@ function PlayState:update(dt)
                     self.ball.y = brick.y - self.ball.height
                 else
                     self.ball.dy = -self.ball.dy
-                    self.ball.y = brick.y + 16
+                    self.ball.y = brick.y + brick.height
                 end
                 break
             end
@@ -90,7 +105,8 @@ function PlayState:update(dt)
                     paddle = self.paddle,
                     bricks = self.bricks,
                     health = self.health,
-                    score = self.score
+                    score = self.score,
+                    level = self.level
                 })
             end
         end

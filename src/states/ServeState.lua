@@ -5,6 +5,7 @@ function ServeState:enter(paras)
     self.bricks = paras.bricks
     self.health = paras.health
     self.score = paras.score
+    self.level = paras.level
     
     self.ball = Ball() 
 end
@@ -20,7 +21,8 @@ function ServeState:update(dt)
             bricks = self.bricks,
             health = self.health,
             score = self.score,
-            ball = self.ball
+            ball = self.ball,
+            level = self.level
         })
     end
 end
@@ -35,6 +37,6 @@ function ServeState:render()
 
     renderHealth(self.health)
     renderScore(self.score)
-
+    print('Level '..self.level,'large',0,VIRTUAL_HEIGHT/3,VIRTUAL_WIDTH,'center')
     print('Press Enter to serve!','medium',0,VIRTUAL_HEIGHT/2,VIRTUAL_WIDTH,'center')
 end

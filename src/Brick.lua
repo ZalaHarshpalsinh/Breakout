@@ -36,13 +36,13 @@ function Brick:init(x,y,skin,tier)
     self.height = TILE_HEIGHT
     self.destroyed = false
 
-    self.particle_system = love.graphics.newParticleSystem(gTextures['particle'],64)
+    self.particle_system = love.graphics.newParticleSystem(gTextures['particle'],20)
 
     self.particle_system:setEmissionArea('normal',10,10)
 
-    self.particle_system:setParticleLifetime(0.5,1)
+    self.particle_system:setParticleLifetime(1,2)
 
-    self.particle_system:setLinearAcceleration(-15,0,15,80)
+    self.particle_system:setLinearAcceleration(-20,50,20,100)
 end
 
 function Brick:update(dt)
@@ -72,7 +72,7 @@ function Brick:hit()
         paletteColors[self.skin]['b']/255,
         0
     )
-    self.particle_system:emit(64)
+    self.particle_system:emit(20)
 
     if self.tier > 1 then
         self.tier = self.tier - 1
