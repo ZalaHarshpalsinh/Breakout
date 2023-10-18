@@ -7,7 +7,7 @@ StartState = Class{__includes = BaseState}
 
 function StartState:init()
     --array to store all the options in the menu
-    self.options = {'START','HIGH SCORES','QUITE'}
+    self.options = {'START','HIGH SCORES','EXIT'}
 
     --variable to keep track of the currently highlighted option's index
     self.current_option = 1
@@ -39,6 +39,8 @@ function StartState:update(dt)
                 score = 0,
                 level = 1
             })
+        elseif self.current_option == 2 then
+            gStateMachine:change('HighScoreState')
         elseif self.current_option == 3 then
             love.event.quit()
         end

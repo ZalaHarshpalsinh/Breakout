@@ -69,7 +69,8 @@ function love.load()
         ['PlayState'] = function() return PlayState() end,
         ['ServeState'] = function() return ServeState() end,
         ['LevelCompleteState'] = function() return LevelCompleteState() end,
-        ['GameOverState'] = function() return GameOverState() end
+        ['GameOverState'] = function() return GameOverState() end,
+        ['HighScoreState'] = function() return HighScoreState() end
     }
 
     --setting the current state to start state at the start of the game

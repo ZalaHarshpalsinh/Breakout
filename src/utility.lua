@@ -178,3 +178,30 @@ end
 function renderScore(score)
     print('Score: ' .. tostring(score),'small', VIRTUAL_WIDTH - 100,5,100,'right')
 end
+
+function load_high_scores()
+    love.filesystem.setIdentity('breakout')
+
+    if not love.filesystem.getInfo('breakout.lst') then
+        love.filesystem.write('breakout.lst','ABCD\n123')
+    end
+
+    local scores = {}
+    local is_name = true
+    local score = {
+        name =  "",
+        score = 0
+    }
+
+    for line in love.filesystem.lines('breakout.lst') do
+        if is_name then
+            score.name = line;
+        else
+            score.score = tonumber(line)
+            scores[#scores+1] = score
+        end
+        is_name = not is_name
+    end
+    
+    return scores
+end
