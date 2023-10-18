@@ -17,6 +17,9 @@ function LevelCompleteState:update(dt)
             level = self.level+1
         })
     end
+    if love.keyboard.wasPressed('escape') then
+        gStateMachine:change('StartState')
+    end
 end
 
 function LevelCompleteState:render()

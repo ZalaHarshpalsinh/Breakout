@@ -24,6 +24,8 @@ function ServeState:update(dt)
             ball = self.ball,
             level = self.level
         })
+    elseif love.keyboard.wasPressed('escape') then
+        gStateMachine:change('StartState')
     end
 end
 

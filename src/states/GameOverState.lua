@@ -32,6 +32,10 @@ function GameOverState:update(dt)
             gStateMachine:change('StartState')
         end
     end
+
+    if love.keyboard.wasPressed('escape') then
+        gStateMachine:change('StartState')
+    end
 end
 
 function GameOverState:render()
