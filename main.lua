@@ -41,7 +41,8 @@ function love.load()
         ['paddles'] = GenerateQuadsPaddles(gTextures['main']),
         ['balls'] = GenerateQuadsBalls(gTextures['main']),
         ['bricks'] = GenerateQuadsBricks(gTextures['main']),
-        ['hearts'] = GenerateQuadsHearts(gTextures['main'])
+        ['hearts'] = GenerateQuadsHearts(gTextures['main']),
+        ['arrows'] = GenerateQuads(gTextures['arrows'],24,24)
     }
 
     --load all the sound effects
@@ -71,7 +72,8 @@ function love.load()
         ['LevelCompleteState'] = function() return LevelCompleteState() end,
         ['GameOverState'] = function() return GameOverState() end,
         ['HighScoreState'] = function() return HighScoreState() end,
-        ['EnterHighScoreState'] = function() return EnterHighScoreState() end
+        ['EnterHighScoreState'] = function() return EnterHighScoreState() end,
+        ['PaddleSelectState'] = function() return PaddleSelectState() end
     }
 
     --setting the current state to start state at the start of the game

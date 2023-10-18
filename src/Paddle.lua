@@ -3,13 +3,13 @@
 Paddle = Class{}
 
 
-function Paddle:init()
+function Paddle:init(skin)
 
     --size of the paddle, which also denotes the half the number of tiles in the paddle, as each size addes 2 tiles in the paddle
     self.size = 2
 
     --skin colour of the paddle, used to find the correct index for the paddle in the gQuads['paddles'] table
-    self.skin = 1
+    self.skin = skin
 
     --Paddle will spawn in the middle of the game world,in the bottom
     self.x = VIRTUAL_WIDTH/2 - 32
