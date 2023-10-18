@@ -183,22 +183,17 @@ function load_high_scores()
     love.filesystem.setIdentity('breakout')
 
     if not love.filesystem.getInfo('breakout.lst') then
-        love.filesystem.write('breakout.lst','ABCD\n123')
+        love.filesystem.write('breakout.lst','harshpal\n0\n')
     end
 
     local scores = {}
     local is_name = true
-    local score = {
-        name =  "",
-        score = 0
-    }
-
+    local name = ""
     for line in love.filesystem.lines('breakout.lst') do
         if is_name then
-            score.name = line;
+            name = line
         else
-            score.score = tonumber(line)
-            scores[#scores+1] = score
+            scores[#scores+1] = {name = name, score = tonumber(line)}
         end
         is_name = not is_name
     end

@@ -7,7 +7,7 @@ StartState = Class{__includes = BaseState}
 
 function StartState:init()
     --array to store all the options in the menu
-    self.options = {'START','HIGH SCORES','EXIT'}
+    self.options = {'START','ENTER SCORE','HIGH SCORES','EXIT'}
 
     --variable to keep track of the currently highlighted option's index
     self.current_option = 1
@@ -40,10 +40,20 @@ function StartState:update(dt)
                 level = 1
             })
         elseif self.current_option == 2 then
-            gStateMachine:change('HighScoreState')
+            gStateMachine:change('EnterHighScoreState',{
+                new_score = 1000,
+                new_score_index = 1,
+                highScores = load_high_scores()
+            })
         elseif self.current_option == 3 then
+            gStateMachine:change('HighScoreState')
+        elseif self.current_option == 4 then
             love.event.quit()
         end
+    end
+
+    if love.keyboard.wasPressed('escape') then
+        love.event.quit()
     end
 end
 
@@ -52,7 +62,7 @@ end
 function StartState:render()
 
     --a local variable to keep track of imaginary cursor's y coordinate
-    local cursorY = VIRTUAL_HEIGHT/3;
+    local cursorY = VIRTUAL_HEIGHT/3
 
     --TITLE
     print("BREAKOUT",'large',0,cursorY,VIRTUAL_WIDTH,'center')

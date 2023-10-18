@@ -70,7 +70,8 @@ function love.load()
         ['ServeState'] = function() return ServeState() end,
         ['LevelCompleteState'] = function() return LevelCompleteState() end,
         ['GameOverState'] = function() return GameOverState() end,
-        ['HighScoreState'] = function() return HighScoreState() end
+        ['HighScoreState'] = function() return HighScoreState() end,
+        ['EnterHighScoreState'] = function() return EnterHighScoreState() end
     }
 
     --setting the current state to start state at the start of the game
@@ -78,6 +79,7 @@ function love.load()
 
     --a table that is used to keep track of the keys that have been pressed by the user in current frame
     love.keyboard.keysPressed = {}
+    love.keyboard.pressedAlphabet = nil
 
 end
 
@@ -90,6 +92,7 @@ function love.update(dt)
 
     --reset keys pressed for next frame
     love.keyboard.keysPressed = {}
+    love.keyboard.alphaPressed = false
 end
 
 --love's draw function to draw each frame
@@ -124,6 +127,10 @@ end
 
 --a function which is called when a key is pressed
 function love.keypressed(key)
+    if #key==1 and string.match(key,'%l') then
+        love.keyboard.alphaPressed = true
+        love.keyboard.pressedAlphabet = key
+    end
     --marking input key in out keysPressed table
     love.keyboard.keysPressed[key] = true
 end

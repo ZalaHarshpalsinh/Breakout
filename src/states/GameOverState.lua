@@ -1,12 +1,36 @@
 GameOverState = Class{__includes = BaseState}
 
+function GameOverState:init()
+    self.highScores = load_high_scores()
+end
+
 function GameOverState:enter(paras)
     self.score = paras.score
+
+    local is_new_high_score = #self.highScores == 0 and true or false
+    self.highscore_index = 1
+
+    for i=#self.highScores,1,-1 do
+        local score = self.highScores[i].score
+
+        if self.score>=score then
+            is_new_high_score = true
+            self.highscore_index = i
+        end
+    end
 end
 
 function GameOverState:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
-        gStateMachine:change('StartState')
+        if is_new_high_score then
+            gStateMachine:change('EnterHighScoreState',{
+                new_score = self.score,
+                new_score_index = self.highscore_index,
+                highScores = self.highScores
+            })
+        else
+            gStateMachine:change('StartState')
+        end
     end
 end
 
