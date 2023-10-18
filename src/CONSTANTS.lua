@@ -14,4 +14,4 @@ TILE_WIDTH = 16
 TILE_HEIGHT = 16
 
 --speed of the paddle
-PADDLE_SPEED = 200
+PADDLE_SPEED = 300

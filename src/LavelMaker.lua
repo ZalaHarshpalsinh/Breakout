@@ -5,8 +5,8 @@ function LevelMaker.createMap(level)
     local bricks = {}
 
     local difficulty = (level%4) == 0 and 4 or level%4
-    local rows = math.random(1)
-    local columns = math.random(2)
+    local rows = math.random(1,5)
+    local columns = math.random(7,13)
 
     local highestSkin = difficulty 
     local highestTier = difficulty

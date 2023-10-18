@@ -5,11 +5,21 @@ function EnterHighScoreState:enter(paras)
     self.new_score_index = paras.new_score_index
     self.highScores = paras.highScores
     self.name = ''
+    self.cursor_char = '_'
+    self.cursor = self.cursor_char
+    self.timer = 0
+    self.blink_time = 0.4
 end
 
 function EnterHighScoreState:update(dt)
+    self.timer = self.timer + dt
+    if(self.timer > self.blink_time) then
+        self.cursor = self.cursor == '' and self.cursor_char or ''
+        self.timer = 0
+    end
+
     if love.keyboard.alphaPressed then
-        if #self.name <= 20 then
+        if #self.name < 20 then
             self.name = self.name .. love.keyboard.pressedAlphabet
         else
             --sound
@@ -41,6 +51,10 @@ function EnterHighScoreState:update(dt)
             --sound
         end
     end
+
+    if love.keyboard.wasPressed('escape') then
+       gStateMachine:change('StartState')
+    end
 end
 
 function EnterHighScoreState:render()
@@ -53,7 +67,7 @@ function EnterHighScoreState:render()
     love.graphics.rectangle('fill',VIRTUAL_WIDTH/2-100,cursorY,200,25)
     cursorY = cursorY + 5
     love.graphics.setColor(1,1,1,1)
-    print(self.name,'medium',0,cursorY,VIRTUAL_WIDTH,'center')
+    print(self.name..self.cursor,'medium',0,cursorY,VIRTUAL_WIDTH,'center')
     cursorY = cursorY + 40
     love.graphics.setColor(129/255, 31/255, 204/255 , 1)
     print('Your score: '..self.new_score,'medium',0,cursorY,VIRTUAL_WIDTH,'center')
