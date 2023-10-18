@@ -19,8 +19,8 @@ function PlayState:enter(paras)
     self.active_bricks = #self.bricks
     
     --give ball some random velocity
-    self.ball.dx = math.random(-200,200)
-    self.ball.dy = math.random(-200,-100)
+    self.ball.dx = 2
+    self.ball.dy =  1000
     
     --bool to know if game is paused or not
     self.paused = false

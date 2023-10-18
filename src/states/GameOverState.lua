@@ -7,14 +7,14 @@ end
 function GameOverState:enter(paras)
     self.score = paras.score
 
-    local is_new_high_score = #self.highScores == 0 and true or false
-    self.highscore_index = 1
+    self.is_new_high_score = #self.highScores < 10
+    self.highscore_index = #self.highScores + 1
 
     for i=#self.highScores,1,-1 do
         local score = self.highScores[i].score
 
         if self.score>=score then
-            is_new_high_score = true
+            self.is_new_high_score = true
             self.highscore_index = i
         end
     end
@@ -22,7 +22,7 @@ end
 
 function GameOverState:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
-        if is_new_high_score then
+        if self.is_new_high_score then
             gStateMachine:change('EnterHighScoreState',{
                 new_score = self.score,
                 new_score_index = self.highscore_index,
