@@ -42,7 +42,8 @@ function love.load()
         ['balls'] = GenerateQuadsBalls(gTextures['main']),
         ['bricks'] = GenerateQuadsBricks(gTextures['main']),
         ['hearts'] = GenerateQuadsHearts(gTextures['main']),
-        ['arrows'] = GenerateQuads(gTextures['arrows'],24,24)
+        ['arrows'] = GenerateQuads(gTextures['arrows'],24,24),
+        ['powerups'] = GenerateQuadsPowerUps(gTextures['main'])
     }
 
     --load all the sound effects

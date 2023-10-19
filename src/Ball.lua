@@ -51,23 +51,6 @@ function Ball:render()
 end
 
 
---Function to check if ball collides with given object
-function Ball:collides(object)
-
-    --Ball is completely right or left to the object, then return false
-    if self.x > object.x + object.width or object.x > self.x+self.width then
-        return false
-    end
-
-    --Ball is completely above or below the object, then return false
-    if self.y > object.y + object.height or object.y > self.y+self.height then
-        return false
-    end
-
-    --if none of the above is true, then collision has happened.return true
-    return true
-end 
-
 --function to reset the ball and put it in the middle of the screen with 0 velocity
 function Ball:reset()
     self.x = VIRTUAL_WIDTH/2 - self.width/2

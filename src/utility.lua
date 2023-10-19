@@ -1,6 +1,24 @@
 --This file contains all the utility functions that are used throught other files
 
 
+--Function to check if ball collides with given object
+function collides(object1,object2)
+
+    --Ball is completely right or left to the object, then return false
+    if object1.x > object2.x + object2.width or object2.x > object1.x+object1.width then
+        return false
+    end
+
+    --Ball is completely above or below the object, then return false
+    if object1.y > object2.y + object2.height or object2.y > object1.y+object1.height then
+        return false
+    end
+
+    --if none of the above is true, then collision has happened.return true
+    return true
+end
+
+
 --function to print on the screen with a specified font.
 --To avoid writing same lines of code again and again and to increase readablity.
 function print(string,font,x,y,textBoxWidth,alignment)
@@ -59,6 +77,14 @@ function GenerateQuadsBricks(atlas)
     return table.slice(GenerateQuads(atlas,2*TILE_WIDTH,TILE_HEIGHT),1,16,1)
 end
 
+function GenerateQuadsPowerUps(atlas)
+    local powerups = {}
+
+    powerups['extra_balls'] = love.graphics.newQuad(6*TILE_WIDTH,12*TILE_HEIGHT,TILE_WIDTH,TILE_HEIGHT,atlas:getDimensions())
+    powerups['key'] = love.graphics.newQuad(9*TILE_WIDTH,12*TILE_HEIGHT,TILE_WIDTH,TILE_HEIGHT,atlas:getDimensions())
+
+    return powerups
+end
 
 --This function takes the whole atlas (sprite sheet) and cuts out and reuturns the different Paddle shrites (Or to say more precisely, their quads) from it.
 function GenerateQuadsPaddles(atlas)

@@ -15,3 +15,5 @@ TILE_HEIGHT = 16
 
 --speed of the paddle
 PADDLE_SPEED = 300
+
+POWERUP_SPEED = 50

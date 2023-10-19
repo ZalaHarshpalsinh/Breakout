@@ -24,6 +24,10 @@ require 'src/Paddle'
 --a filr that contains Ball class to represent the ball in the game
 require 'src/Ball'
 
+require 'src/PowerUp'
+
+require 'src/powerups/ExtraBalls'
+
 require 'src/LavelMaker'
 require 'src/Brick'
 
