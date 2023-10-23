@@ -21,23 +21,36 @@ function PlayState:enter(paras)
     --give ball some random velocity
 
     self.balls[1].dx = math.random(-200,200)
-    self.balls[1].dy = math.random(-200,-100)
+    self.balls[1].dy = math.random(-150,-100)
     
     --bool to know if game is paused or not
     self.paused = false
 
     self.hits_target = {
-        ['extra_balls'] = 1, --math.random(2,5),
-        ['key'] = 1 -- math.random(5,10)
+        ['extra_balls'] = math.random(5,10),
+        ['key'] = self.active_bricks/2
     }
     self.hits_count = 0
 
     self.powerups = {}
+
+    self.locked_brick_index = 0
+    for i,brick in pairs(self.bricks) do
+        if brick.locked then
+            self.locked_brick_index = i
+        end
+    end
 end
 
-function PlayState:spawn_powerups(x,y)
-    if ExtraBalls.should_spawn(self) then
+function PlayState:spawn_powerup(x,y)
+    if Key.should_spawn(self) then
+        table.insert(self.powerups,Key(x,y))
+    elseif Life.should_spawn(self) then
+        table.insert(self.powerups,Life(x,y))
+    elseif ExtraBalls.should_spawn(self) then
         table.insert(self.powerups,ExtraBalls(x,y))
+    elseif PaddleSizeUp.should_spawn(self) then
+        table.insert(self.powerups,PaddleSizeUp(x,y))
     end
 end
 
@@ -83,12 +96,14 @@ function PlayState:update(dt)
 
                 if not brick.destroyed and collides(ball,brick) then
 
-                    brick:hit()
-
-                    self:spawn_powerups(brick.x+TILE_WIDTH/2,brick.y+TILE_HEIGHT)
-
+                    if not brick.locked then
+                        brick:hit()
+                    end
+                    
                     self.score = self.score + 10
                     self.hits_count = self.hits_count + 1
+
+                    self:spawn_powerup(brick.x+TILE_WIDTH/2,brick.y+TILE_HEIGHT)
 
                     if(brick.destroyed) then self.active_bricks = self.active_bricks -1 end
                     if(self.active_bricks == 0) then 
@@ -127,6 +142,9 @@ function PlayState:update(dt)
                             score = self.score
                         })
                     else
+                        if self.paddle.size~=1 then
+                            self.paddle.size = self.paddle.size - 1 
+                        end
                         gStateMachine:change('ServeState',{
                             paddle = self.paddle,
                             bricks = self.bricks,

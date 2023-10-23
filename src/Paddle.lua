@@ -25,6 +25,8 @@ end
 
 function Paddle:update(dt)
 
+    self.width = (self.size*2*TILE_WIDTH)
+    
     --check for input and  change the velocity of paddle accordingly
     if love.keyboard.isDown('left') then
         self.dx = -PADDLE_SPEED

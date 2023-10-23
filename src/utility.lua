@@ -74,14 +74,18 @@ end
 
 
 function GenerateQuadsBricks(atlas)
-    return table.slice(GenerateQuads(atlas,2*TILE_WIDTH,TILE_HEIGHT),1,16,1)
+    local bricks =  table.slice(GenerateQuads(atlas,2*TILE_WIDTH,TILE_HEIGHT),1,16,1)
+    table.insert(bricks,love.graphics.newQuad(10*TILE_WIDTH,3*TILE_HEIGHT,2*TILE_WIDTH,TILE_HEIGHT,atlas:getDimensions()))
+    return bricks
 end
 
 function GenerateQuadsPowerUps(atlas)
     local powerups = {}
 
-    powerups['extra_balls'] = love.graphics.newQuad(6*TILE_WIDTH,12*TILE_HEIGHT,TILE_WIDTH,TILE_HEIGHT,atlas:getDimensions())
+    powerups['extra_balls'] = love.graphics.newQuad(7*TILE_WIDTH,12*TILE_HEIGHT,TILE_WIDTH,TILE_HEIGHT,atlas:getDimensions())
     powerups['key'] = love.graphics.newQuad(9*TILE_WIDTH,12*TILE_HEIGHT,TILE_WIDTH,TILE_HEIGHT,atlas:getDimensions())
+    powerups['paddle_size_up'] = love.graphics.newQuad(4*TILE_WIDTH,12*TILE_HEIGHT,TILE_WIDTH,TILE_HEIGHT,atlas:getDimensions())
+    powerups['life'] = love.graphics.newQuad(2*TILE_WIDTH,12*TILE_HEIGHT,TILE_WIDTH,TILE_HEIGHT,atlas:getDimensions())
 
     return powerups
 end
@@ -118,7 +122,7 @@ function GenerateQuadsPaddles(atlas)
         paddles[counter] = love.graphics.newQuad(x,y,6*TILE_WIDTH,TILE_HEIGHT,atlas:getDimensions())
         counter = counter + 1
         --move scissors to left
-        x = x + 6 * TILE_WIDTH
+        x = 0 
 
         --huge paddle
         paddles[counter] = love.graphics.newQuad(x,y+TILE_HEIGHT,8*TILE_WIDTH,TILE_HEIGHT,atlas:getDimensions())

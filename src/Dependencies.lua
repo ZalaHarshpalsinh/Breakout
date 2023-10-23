@@ -27,6 +27,9 @@ require 'src/Ball'
 require 'src/PowerUp'
 
 require 'src/powerups/ExtraBalls'
+require 'src/powerups/Life'
+require 'src/powerups/Key'
+require 'src/powerups/PaddleSizeUp'
 
 require 'src/LavelMaker'
 require 'src/Brick'

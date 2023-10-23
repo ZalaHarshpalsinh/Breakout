@@ -8,9 +8,9 @@ end
 function ExtraBalls.should_spawn(playstate)
     local hits = playstate.hits_count
     local target = playstate.hits_target['extra_balls']
-    local luck = math.random(1)
-    if hits==target then --and luck then
-        playstate.hits_target['extra_balls'] = playstate.hits_target['extra_balls'] + math.random(2,5)
+    local luck = math.random(0,1)
+    if hits==target and luck then
+        playstate.hits_target['extra_balls'] = playstate.hits_target['extra_balls'] + math.random(5,10)
         return true
     else
         return false

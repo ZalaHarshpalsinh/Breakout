@@ -59,6 +59,11 @@ function LevelMaker.createMap(level)
     if #bricks == 0 then
         return LevelMaker.createMap(level)
     else
+        local should_lock = math.random(0,1)
+        if should_lock then
+            local lock_index = math.random(1,#bricks)
+            bricks[lock_index].locked = true
+        end
         return bricks
     end
 end
