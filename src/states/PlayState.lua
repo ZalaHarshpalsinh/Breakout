@@ -115,20 +115,46 @@ function PlayState:update(dt)
                         })
                     end
 
-                    if ball.x + 10  < brick.x  then
-                        ball.dx = -ball.dx
-                        ballx = brick.x - ball.width 
-                    elseif ball.x+ball.width - 10
-                    > brick.x + brick.width  then
-                        ball.dx = -ball.dx
-                        ball.x = brick.x+brick.width
-                    elseif ball.y < brick.y then
-                        ball.dy = -ball.dy
-                        ball.y = brick.y - ball.height
-                    else
-                        ball.dy = -ball.dy
-                        ball.y = brick.y + brick.height
+                    local shift_x=0
+                    local shift_y=0
+
+                    if ( brick.x + brick.width / 2 ) < ( ball.x + ball.width / 2 ) 
+                    then
+                        shift_x = ( brick.x + brick.width ) - ball.x
+                    else 
+                        shift_x = brick.x - ( ball.x + ball.width )
                     end
+
+                    if ( brick.y + brick.height / 2 ) < ( ball.y + ball.height / 2 ) 
+                    then
+                        shift_y = ( brick.y + brick.height ) - ball.y
+                    else
+                        shift_y = brick.y - ( ball.y + ball.height )
+                    end
+
+                    if math.abs(shift_x) < math.abs(shift_y)
+                    then
+                        ball.x = ball.x + shift_x
+                        ball.dx = -ball.dx
+                    else
+                        ball.y = ball.y + shift_y
+                        ball.dy = -ball.dy
+                    end
+                    --Old ball rebounce code
+                    -- if ball.x + 10  < brick.x  then
+                    --     ball.dx = -ball.dx
+                    --     ballx = brick.x - ball.width 
+                    -- elseif ball.x+ball.width - 10
+                    -- > brick.x + brick.width  then
+                    --     ball.dx = -ball.dx
+                    --     ball.x = brick.x+brick.width
+                    -- elseif ball.y < brick.y then
+                    --     ball.dy = -ball.dy
+                    --     ball.y = brick.y - ball.height
+                    -- else
+                    --     ball.dy = -ball.dy
+                    --     ball.y = brick.y + brick.height
+                    -- end
                     break
                 end
             end
