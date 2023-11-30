@@ -4,7 +4,7 @@ require 'src/Dependencies'
 
 --love's load function to set up variables and settings. Called at the beginning of the game once
 function love.load()
-    --set filter to nearest to prevent blur and get crip pixelated look
+    --set filter to nearest to prevent blur and get crisp pixelated look
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
     --seed the random function
@@ -74,7 +74,8 @@ function love.load()
         ['GameOverState'] = function() return GameOverState() end,
         ['HighScoreState'] = function() return HighScoreState() end,
         ['EnterHighScoreState'] = function() return EnterHighScoreState() end,
-        ['PaddleSelectState'] = function() return PaddleSelectState() end
+        ['PaddleSelectState'] = function() return PaddleSelectState() end,
+        ['ManualState'] = function() return ManualState() end
     }
 
     --setting the current state to start state at the start of the game
@@ -83,7 +84,6 @@ function love.load()
     --a table that is used to keep track of the keys that have been pressed by the user in current frame
     love.keyboard.keysPressed = {}
     love.keyboard.pressedAlphabet = nil
-
 end
 
 
@@ -118,7 +118,6 @@ function love.draw()
 
     --stop applying virtual resolution
     push:finish()
-    
 end
 
 

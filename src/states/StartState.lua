@@ -7,7 +7,7 @@ StartState = Class{__includes = BaseState}
 
 function StartState:init()
     --array to store all the options in the menu
-    self.options = {'START','ENTER SCORE','HIGH SCORES','EXIT'}
+    self.options = {'START','HOW TO PLAY','HIGH SCORES','EXIT'}
 
     --variable to keep track of the currently highlighted option's index
     self.current_option = 1
@@ -34,11 +34,7 @@ function StartState:update(dt)
         if self.current_option == 1 then
             gStateMachine:change('PaddleSelectState')
         elseif self.current_option == 2 then
-            gStateMachine:change('EnterHighScoreState',{
-                new_score = 1000,
-                new_score_index = 1,
-                highScores = load_high_scores()
-            })
+            gStateMachine:change('ManualState')
         elseif self.current_option == 3 then
             gStateMachine:change('HighScoreState')
         elseif self.current_option == 4 then
