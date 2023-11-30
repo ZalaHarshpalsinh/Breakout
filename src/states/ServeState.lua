@@ -6,7 +6,9 @@ function ServeState:enter(paras)
     self.health = paras.health
     self.score = paras.score
     self.level = paras.level
-    
+    self.hits_count = paras.hits_count
+    self.hits_target = paras.hits_target
+
     self.ball = Ball() 
 end
 
@@ -22,7 +24,9 @@ function ServeState:update(dt)
             health = self.health,
             score = self.score,
             ball = self.ball,
-            level = self.level
+            level = self.level,
+            hits_count = self.hits_count,
+            hits_target = self.hits_target
         })
     elseif love.keyboard.wasPressed('escape') then
         gStateMachine:change('StartState')

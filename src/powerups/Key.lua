@@ -9,9 +9,15 @@ function Key.should_spawn(playstate)
     local hits = playstate.hits_count
     local target = playstate.hits_target['key']
     local locked_brick_index = playstate.locked_brick_index
+    
+    if playstate.active_bricks==1 then
+        playstate.hits_target['key'] = playstate.hits_count + 1
+    end
 
-    if  locked_brick_index~=0 and hits~=0 and hits==target then
-        playstate.hits_target['key'] = playstate.hits_target['key'] + math.random(2,5) 
+    if  locked_brick_index~=0 and hits==target then
+        if playstate.active_bricks~=1 then
+            playstate.hits_target['key'] = playstate.hits_target['key'] + math.random(2,5)
+        end
         return true
     else
         return false
@@ -19,6 +25,8 @@ function Key.should_spawn(playstate)
 end
 
 function Key.cause_effect(playstate)
-    playstate.bricks[playstate.locked_brick_index].locked = false
-    playstate.locked_brick_index = 0
+    if playstate.locked_brick_index~=0 then
+        playstate.bricks[playstate.locked_brick_index].locked = false
+        playstate.locked_brick_index = 0
+    end
 end

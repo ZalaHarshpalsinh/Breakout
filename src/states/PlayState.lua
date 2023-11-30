@@ -26,11 +26,12 @@ function PlayState:enter(paras)
     --bool to know if game is paused or not
     self.paused = false
 
-    self.hits_target = {
-        ['extra_balls'] = math.random(5,10),
-        ['key'] = self.active_bricks/2
-    }
-    self.hits_count = 0
+    self.hits_target = paras.hits_target 
+    -- {
+    --     ['extra_balls'] = math.random(5,10),
+    --     ['key'] = self.active_bricks/2
+    -- }
+    self.hits_count = paras.hits_count
 
     self.powerups = {}
 
@@ -105,7 +106,10 @@ function PlayState:update(dt)
 
                     self:spawn_powerup(brick.x+TILE_WIDTH/2,brick.y+TILE_HEIGHT)
 
-                    if(brick.destroyed) then self.active_bricks = self.active_bricks -1 end
+                    if(brick.destroyed) then
+                        table.remove(self.bricks,i) 
+                        self.active_bricks = self.active_bricks - 1 
+                    end
                     if(self.active_bricks == 0) then 
                         gStateMachine:change('LevelCompleteState',{
                             level = self.level,
@@ -140,21 +144,6 @@ function PlayState:update(dt)
                         ball.y = ball.y + shift_y
                         ball.dy = -ball.dy
                     end
-                    --Old ball rebounce code
-                    -- if ball.x + 10  < brick.x  then
-                    --     ball.dx = -ball.dx
-                    --     ballx = brick.x - ball.width 
-                    -- elseif ball.x+ball.width - 10
-                    -- > brick.x + brick.width  then
-                    --     ball.dx = -ball.dx
-                    --     ball.x = brick.x+brick.width
-                    -- elseif ball.y < brick.y then
-                    --     ball.dy = -ball.dy
-                    --     ball.y = brick.y - ball.height
-                    -- else
-                    --     ball.dy = -ball.dy
-                    --     ball.y = brick.y + brick.height
-                    -- end
                     break
                 end
             end
@@ -176,7 +165,9 @@ function PlayState:update(dt)
                             bricks = self.bricks,
                             health = self.health,
                             score = self.score,
-                            level = self.level
+                            level = self.level,
+                            hits_count = self.hits_count,
+                            hits_target = self.hits_target
                         })
                     end
                 end
@@ -218,7 +209,7 @@ function PlayState:render()
     end
 
     renderHealth(self.health)
-    renderScore(self.score)
+    renderScore(self.active_bricks)
 
     --if game is paused, display Pause text
     if self.paused then

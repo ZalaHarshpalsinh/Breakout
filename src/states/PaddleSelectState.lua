@@ -16,12 +16,20 @@ function PaddleSelectState:update(dt)
     end
 
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+
+        local bricks = LevelMaker.createMap(1)
         gStateMachine:change('ServeState',{
             paddle = Paddle(self.currentPaddle),
-            bricks = LevelMaker.createMap(1),
+            bricks = bricks,
             health = 3,
             score = 0,
-            level = 1
+            level = 1,
+            hits_count = 0,
+            hits_target = 
+            {
+                ['extra_balls'] = math.random(5,10),
+                ['key'] = #bricks/2
+            }
         })
     elseif love.keyboard.wasPressed('escape') then
         gStateMachine:change('StartState')

@@ -9,12 +9,21 @@ end
 
 function LevelCompleteState:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+
+        local bricks =  LevelMaker.createMap(self.level+1)
+        
         gStateMachine:change('ServeState',{
             paddle = self.paddle,
             score = self.score,
             health = self.health,
-            bricks = LevelMaker.createMap(self.level+1),
-            level = self.level+1
+            bricks = bricks,
+            level = self.level+1,
+            hits_count = 0,
+            hits_target = 
+            {
+                ['extra_balls'] = math.random(5,10),
+                ['key'] = #bricks/2
+            }
         })
     end
     if love.keyboard.wasPressed('escape') then
