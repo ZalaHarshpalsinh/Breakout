@@ -44,7 +44,7 @@ function ServeState:render()
     end
 
     renderHealth(self.health)
-    renderScore(self)
+    renderScore(self.score)
     print('Level '..self.level,'large',0,VIRTUAL_HEIGHT/3,VIRTUAL_WIDTH,'center')
     print('Press Enter to serve!','medium',0,VIRTUAL_HEIGHT/2,VIRTUAL_WIDTH,'center')
 end

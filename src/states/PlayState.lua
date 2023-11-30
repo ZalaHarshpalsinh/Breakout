@@ -211,7 +211,7 @@ function PlayState:render()
     end
 
     renderHealth(self.health)
-    renderScore(self)
+    renderScore(self.score)
 
     --if game is paused, display Pause text
     if self.paused then

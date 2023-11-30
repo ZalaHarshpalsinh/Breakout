@@ -22,13 +22,13 @@ function PaddleSelectState:update(dt)
             paddle = Paddle(self.currentPaddle),
             bricks = bricks,
             health = 3,
-            score = 1000,
+            score = 0,
             level = 1,
             hits_count = 0,
             hits_target = 
             {
                 ['extra_balls'] = math.random(5,10),
-                ['key'] = #bricks/2
+                ['key'] = math.floor(#bricks/2)
             },
             active_bricks = #bricks
         })

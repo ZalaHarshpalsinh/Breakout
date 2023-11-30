@@ -205,19 +205,8 @@ function renderHealth(health)
     end
 end
 
-function renderScore(playstate)
-    local y = 35
-    print('Score: ' .. tostring(playstate.score),'small', VIRTUAL_WIDTH - 700,y,700,'right')
-    y = y + 56 + 35
-    print('bc: ' .. tostring(#playstate.bricks),'small', VIRTUAL_WIDTH - 700,y,700,'right')
-    y = y + 56 + 35
-    print('ab: ' .. tostring(playstate.active_bricks),'small', VIRTUAL_WIDTH - 700,y,700,'right')
-    y = y + 56 + 35
-    print('hc: ' .. tostring(playstate.hits_count),'small', VIRTUAL_WIDTH - 700,y,700,'right')
-    y = y + 56 + 35
-    print('locked: ' .. tostring(playstate.locked_brick_index),'small', VIRTUAL_WIDTH - 700,y,700,'right')
-    y = y + 56 + 35
-    print('target: ' .. tostring(playstate.hits_target['key']),'small', VIRTUAL_WIDTH - 700,y,700,'right')
+function renderScore(score)
+    print('Score: ' .. tostring(score),'small', VIRTUAL_WIDTH - 700,35,700,'right')
 end
 
 function load_high_scores()

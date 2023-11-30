@@ -37,13 +37,13 @@ function Brick:init(x,y,skin,tier)
     self.destroyed = false
     self.locked = false
 
-    self.particle_system = love.graphics.newParticleSystem(gTextures['particle'],20)
+    self.particle_system = love.graphics.newParticleSystem(gTextures['particle'],140)
 
-    self.particle_system:setEmissionArea('normal',10*SCALE_X,10*SCALE_Y)
+    self.particle_system:setEmissionArea('normal',10,10)
 
     self.particle_system:setParticleLifetime(1,2)
 
-    self.particle_system:setLinearAcceleration(-20*SCALE_X,50*SCALE_Y,20*SCALE_X,100*SCALE_Y)
+    self.particle_system:setLinearAcceleration(-20,50,20,100)
 end
 
 function Brick:update(dt)

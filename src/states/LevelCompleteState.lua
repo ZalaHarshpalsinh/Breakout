@@ -22,7 +22,7 @@ function LevelCompleteState:update(dt)
             hits_target = 
             {
                 ['extra_balls'] = math.random(5,10),
-                ['key'] = #bricks/2
+                ['key'] = math.floor(#bricks/2)
             },
             active_bricks = #bricks
         })
