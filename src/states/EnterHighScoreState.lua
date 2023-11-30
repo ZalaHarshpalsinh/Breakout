@@ -58,20 +58,20 @@ function EnterHighScoreState:update(dt)
 end
 
 function EnterHighScoreState:render()
-    local cursorY = 20
+    local cursorY = 140
     print('New High Score','large',0,cursorY,VIRTUAL_WIDTH,'center')
-    cursorY = cursorY + 60
+    cursorY = cursorY + 420
     print('Enter your name:','medium',0,cursorY,VIRTUAL_WIDTH,'center')
-    cursorY = cursorY + 40
+    cursorY = cursorY + 280
     love.graphics.setColor(129/255, 31/255, 204/255 , 0.65)
-    love.graphics.rectangle('fill',VIRTUAL_WIDTH/2-100,cursorY,200,25)
-    cursorY = cursorY + 5
+    love.graphics.rectangle('fill',VIRTUAL_WIDTH/2-750,cursorY,1500,175)
+    cursorY = cursorY + 35
     love.graphics.setColor(1,1,1,1)
     print(self.name..self.cursor,'medium',0,cursorY,VIRTUAL_WIDTH,'center')
-    cursorY = cursorY + 40
+    cursorY = cursorY + 280
     love.graphics.setColor(129/255, 31/255, 204/255 , 1)
     print('Your score: '..self.new_score,'medium',0,cursorY,VIRTUAL_WIDTH,'center')
-    cursorY = cursorY + 40
+    cursorY = cursorY + 280
     love.graphics.setColor(1,1,1,1)
     print('Press enter when you are finished.','small',0,cursorY,VIRTUAL_WIDTH,'center')
 end

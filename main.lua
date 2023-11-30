@@ -5,7 +5,7 @@ require 'src/Dependencies'
 --love's load function to set up variables and settings. Called at the beginning of the game once
 function love.load()
     --set filter to nearest to prevent blur and get crisp pixelated look
-    love.graphics.setDefaultFilter('nearest', 'nearest')
+    love.graphics.setDefaultFilter('nearest')
 
     --seed the random function
     math.randomseed(os.time())
@@ -22,9 +22,9 @@ function love.load()
 
     --initialize different fonts
     gFonts = {
-        ['small'] = love.graphics.newFont('resources/fonts/font.ttf', 8),
-        ['medium'] = love.graphics.newFont('resources/fonts/font.ttf', 16),
-        ['large'] = love.graphics.newFont('resources/fonts/font.ttf', 32)
+        ['small'] = love.graphics.newFont('resources/fonts/font.ttf', 56),
+        ['medium'] = love.graphics.newFont('resources/fonts/font.ttf', 112),
+        ['large'] = love.graphics.newFont('resources/fonts/font.ttf', 224)
     }
 
     --load all the images/graphics of the game
@@ -33,7 +33,8 @@ function love.load()
         ['main'] = love.graphics.newImage('resources/graphics/breakout.png'),
         ['arrows'] = love.graphics.newImage('resources/graphics/arrows.png'),
         ['hearts'] = love.graphics.newImage('resources/graphics/hearts.png'),
-        ['particle'] = love.graphics.newImage('resources/graphics/particle.png')
+        ['particle'] = love.graphics.newImage('resources/graphics/particle.png'),
+        ['manual'] = GenerateImagesManual()
     }
 
     --generating quads for all the sprites from the main texture, which will allow us to draw only a particular sprite from the entire sheet

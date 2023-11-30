@@ -8,6 +8,7 @@ function ServeState:enter(paras)
     self.level = paras.level
     self.hits_count = paras.hits_count
     self.hits_target = paras.hits_target
+    self.active_bricks = paras.active_bricks
 
     self.ball = Ball() 
 end
@@ -26,7 +27,8 @@ function ServeState:update(dt)
             ball = self.ball,
             level = self.level,
             hits_count = self.hits_count,
-            hits_target = self.hits_target
+            hits_target = self.hits_target,
+            active_bricks = self.active_bricks
         })
     elseif love.keyboard.wasPressed('escape') then
         gStateMachine:change('StartState')
@@ -42,7 +44,7 @@ function ServeState:render()
     end
 
     renderHealth(self.health)
-    renderScore(self.score)
+    renderScore(self)
     print('Level '..self.level,'large',0,VIRTUAL_HEIGHT/3,VIRTUAL_WIDTH,'center')
     print('Press Enter to serve!','medium',0,VIRTUAL_HEIGHT/2,VIRTUAL_WIDTH,'center')
 end

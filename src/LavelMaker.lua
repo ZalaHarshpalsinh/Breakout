@@ -35,8 +35,8 @@ function LevelMaker.createMap(level)
                 gapFlag = not gapFlag
             end
 
-            local brick_x = 8+((x-1)*2*TILE_WIDTH)+((13-columns)*TILE_WIDTH)
-            local brick_y = y*TILE_HEIGHT
+            local brick_x = 8*SCALE_X+((x-1)*2*TILE_WIDTH*SCALE_X)+((13-columns)*TILE_WIDTH*SCALE_X)
+            local brick_y = y*TILE_HEIGHT*SCALE_Y
             local brick_skin
             local brick_tier
             

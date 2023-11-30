@@ -16,12 +16,12 @@ function PlayState:enter(paras)
     self.score = paras.score
     self.level = paras.level
 
-    self.active_bricks = #self.bricks
+    self.active_bricks = paras.active_bricks
     
     --give ball some random velocity
 
-    self.balls[1].dx = math.random(-200,200)
-    self.balls[1].dy = math.random(-150,-100)
+    self.balls[1].dx = math.random(-200,200)*SCALE_X
+    self.balls[1].dy = math.random(-150,-100)*SCALE_Y
     
     --bool to know if game is paused or not
     self.paused = false
@@ -84,10 +84,10 @@ function PlayState:update(dt)
                 
                 if ball.dx > 0 and self.paddle.dx < 0 then
                     local dis = self.paddle.x+self.paddle.width - (ball.x + ball.width)
-                    ball.dx = - (50 + (2*(math.abs(dis))))
+                    ball.dx = - (350 + (2*(math.abs(dis))))
                 elseif ball.dx < 0 and self.paddle.dx > 0 then
                     local dis = ball.x - self.paddle.x
-                    ball.dx =  (50 + (2*(math.abs(dis))))
+                    ball.dx =  (350 + (2*(math.abs(dis))))
                 end
             end
 
@@ -104,24 +104,12 @@ function PlayState:update(dt)
                     self.score = self.score + 10
                     self.hits_count = self.hits_count + 1
 
-                    self:spawn_powerup(brick.x+TILE_WIDTH/2,brick.y+TILE_HEIGHT)
+                    self:spawn_powerup(brick.x+TILE_WIDTH*SCALE_X/2,brick.y+TILE_HEIGHT*SCALE_Y)
 
-                    if(brick.destroyed) then
-                        table.remove(self.bricks,i) 
-                        self.active_bricks = self.active_bricks - 1 
-                    end
-                    if(self.active_bricks == 0) then 
-                        gStateMachine:change('LevelCompleteState',{
-                            level = self.level,
-                            paddle = self.paddle,
-                            health = self.health,
-                            score = self.score
-                        })
-                    end
-
+                    
                     local shift_x=0
                     local shift_y=0
-
+                    
                     if ( brick.x + brick.width / 2 ) < ( ball.x + ball.width / 2 ) 
                     then
                         shift_x = ( brick.x + brick.width ) - ball.x
@@ -135,7 +123,7 @@ function PlayState:update(dt)
                     else
                         shift_y = brick.y - ( ball.y + ball.height )
                     end
-
+                    
                     if math.abs(shift_x) < math.abs(shift_y)
                     then
                         ball.x = ball.x + shift_x
@@ -144,6 +132,20 @@ function PlayState:update(dt)
                         ball.y = ball.y + shift_y
                         ball.dy = -ball.dy
                     end
+                    
+                    if(brick.destroyed) then
+                        self.active_bricks = self.active_bricks - 1 
+                    end
+                    
+                    if(self.active_bricks == 0) then 
+                        gStateMachine:change('LevelCompleteState',{
+                            level = self.level,
+                            paddle = self.paddle,
+                            health = self.health,
+                            score = self.score
+                        })
+                    end
+                    
                     break
                 end
             end
@@ -157,7 +159,7 @@ function PlayState:update(dt)
                             score = self.score
                         })
                     else
-                        if self.paddle.size~=1 then
+                        if self.paddle.size~=2 then
                             self.paddle.size = self.paddle.size - 1 
                         end
                         gStateMachine:change('ServeState',{
@@ -167,7 +169,8 @@ function PlayState:update(dt)
                             score = self.score,
                             level = self.level,
                             hits_count = self.hits_count,
-                            hits_target = self.hits_target
+                            hits_target = self.hits_target,
+                            active_bricks = self.active_bricks
                         })
                     end
                 end
@@ -175,7 +178,6 @@ function PlayState:update(dt)
         end
 
         for i,powerup in pairs(self.powerups) do
-            --update the ball
             powerup:update(dt)
             if collides(self.paddle,powerup) then
                 powerup.cause_effect(self)
@@ -209,11 +211,11 @@ function PlayState:render()
     end
 
     renderHealth(self.health)
-    renderScore(self.active_bricks)
+    renderScore(self)
 
     --if game is paused, display Pause text
     if self.paused then
-        print('PAUSED','large',0,VIRTUAL_HEIGHT/2-16,VIRTUAL_WIDTH,'center')
+        print('PAUSED','large',0,VIRTUAL_HEIGHT/2-112,VIRTUAL_WIDTH,'center')
     end
 end
 

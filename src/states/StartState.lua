@@ -57,12 +57,12 @@ function StartState:render()
     --TITLE
     print("BREAKOUT",'large',0,cursorY,VIRTUAL_WIDTH,'center')
 
-    cursorY = cursorY + 40
+    cursorY = cursorY + 280
 
     --instruction
     print("Select a option and press Enter",'small',0,cursorY,VIRTUAL_WIDTH,'center')
 
-    cursorY = cursorY + 20
+    cursorY = cursorY + 140
 
     --Menu
     for i=1,#self.options do
@@ -73,7 +73,7 @@ function StartState:render()
         end
 
         --prrint the option
-        print(self.options[i],'medium',0,cursorY+((i-1)*20),VIRTUAL_WIDTH,'center')
+        print(self.options[i],'medium',0,cursorY+((i-1)*140),VIRTUAL_WIDTH,'center')
 
         --reset the color
         love.graphics.setColor(1,1,1,1)

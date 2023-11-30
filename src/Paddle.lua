@@ -12,20 +12,20 @@ function Paddle:init(skin)
     self.skin = skin
 
     --Paddle will spawn in the middle of the game world,in the bottom
-    self.x = VIRTUAL_WIDTH/2 - 32
-    self.y = VIRTUAL_HEIGHT - 2*TILE_HEIGHT
+    self.x = VIRTUAL_WIDTH/2 - 32*SCALE_X
+    self.y = VIRTUAL_HEIGHT - 2*TILE_HEIGHT*SCALE_Y
 
     --start with no velocity
     self.dx = 0
 
     --Dimensions of the paddle 
-    self.width = (self.size*2*TILE_WIDTH)
-    self.height = TILE_HEIGHT
+    self.width = (self.size*2*TILE_WIDTH*SCALE_X)
+    self.height = TILE_HEIGHT*SCALE_Y
 end
 
 function Paddle:update(dt)
 
-    self.width = (self.size*2*TILE_WIDTH)
+    self.width = (self.size*2*TILE_WIDTH*SCALE_X)
     
     --check for input and  change the velocity of paddle accordingly
     if love.keyboard.isDown('left') then
@@ -43,5 +43,5 @@ end
 function Paddle:render()
 
     --drawing the Paddle using main spritesheet texture and pre-claculated quads 
-    love.graphics.draw(gTextures['main'],gQuads['paddles'][(self.skin-1)*4 + self.size],self.x,self.y)
+    love.graphics.draw(gTextures['main'],gQuads['paddles'][(self.skin-1)*4 + self.size],self.x,self.y,0,SCALE_X,SCALE_Y)
 end

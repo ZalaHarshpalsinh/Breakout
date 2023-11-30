@@ -26,10 +26,10 @@ function ExtraBalls.cause_effect(playstate)
     ball2.x = paddle.x + (paddle.width/2) - (ball1.width/2)
     ball1.y = paddle.y - ball1.height
     ball2.y = paddle.y - ball1.height
-    ball1.dx = math.random(-200,200)
-    ball1.dy = math.random(-200,-100)
-    ball2.dx = math.random(-200,200)
-    ball2.dy = math.random(-200,-100)
+    ball1.dx = math.random(-200,200) * SCALE_X
+    ball1.dy = math.random(-200,-100) * SCALE_Y 
+    ball2.dx = math.random(-200,200) * SCALE_X
+    ball2.dy = math.random(-200,-100) * SCALE_Y
 
     table.insert(playstate.balls,ball1)
     table.insert(playstate.balls,ball2)

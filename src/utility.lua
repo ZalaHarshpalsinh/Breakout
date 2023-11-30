@@ -29,7 +29,7 @@ end
 
 --This function, given an atlas (a sprite sheet) and the width and height of the tiles therein, splits the texture into all the quads by simply dividing it evenly
 function GenerateQuads(atlas,tileWidth,tileHeight)
-
+    
     --number of quads in each row
     local columns = atlas:getWidth() / tileWidth
 
@@ -187,26 +187,37 @@ end
 function displayFPS()
     --set color to green
     love.graphics.setColor(0,1,0,1)
-    print('FPS: ' .. tostring(love.timer.getFPS()),'small', 5 , 5,VIRTUAL_WIDTH,'left')
+    print('FPS: ' .. tostring(love.timer.getFPS()),'small', 35 , 35,VIRTUAL_WIDTH,'left')
     love.graphics.setColor(1,1,1,1)
 end
 
 function renderHealth(health)
-    local health_x = VIRTUAL_WIDTH - 200
+    local health_x = VIRTUAL_WIDTH - 1400
 
     for i=1,health do
-        love.graphics.draw(gTextures['main'],gQuads['hearts'][0],health_x,5)
-        health_x  = health_x + TILE_WIDTH/2 + 3
+        love.graphics.draw(gTextures['main'],gQuads['hearts'][0],health_x,35,0,SCALE_X,SCALE_Y)
+        health_x  = health_x + TILE_WIDTH*SCALE_X/2 + 3
     end
 
     for i=1,3 - health do
-        love.graphics.draw(gTextures['main'],gQuads['hearts'][1],health_x,5)
-        health_x  = health_x + TILE_WIDTH/2 + 3
+        love.graphics.draw(gTextures['main'],gQuads['hearts'][1],health_x,35,0,SCALE_X,SCALE_Y)
+        health_x  = health_x + TILE_WIDTH*SCALE_X/2 + 3
     end
 end
 
-function renderScore(score)
-    print('Score: ' .. tostring(score),'small', VIRTUAL_WIDTH - 100,5,100,'right')
+function renderScore(playstate)
+    local y = 35
+    print('Score: ' .. tostring(playstate.score),'small', VIRTUAL_WIDTH - 700,y,700,'right')
+    y = y + 56 + 35
+    print('bc: ' .. tostring(#playstate.bricks),'small', VIRTUAL_WIDTH - 700,y,700,'right')
+    y = y + 56 + 35
+    print('ab: ' .. tostring(playstate.active_bricks),'small', VIRTUAL_WIDTH - 700,y,700,'right')
+    y = y + 56 + 35
+    print('hc: ' .. tostring(playstate.hits_count),'small', VIRTUAL_WIDTH - 700,y,700,'right')
+    y = y + 56 + 35
+    print('locked: ' .. tostring(playstate.locked_brick_index),'small', VIRTUAL_WIDTH - 700,y,700,'right')
+    y = y + 56 + 35
+    print('target: ' .. tostring(playstate.hits_target['key']),'small', VIRTUAL_WIDTH - 700,y,700,'right')
 end
 
 function load_high_scores()
@@ -229,4 +240,16 @@ function load_high_scores()
     end
     
     return scores
+end
+
+
+function GenerateImagesManual()
+    local manual =
+    {
+        ['basic_rules'] = {},
+    }
+
+    manual['basic_rules'][1] = love.graphics.newImage('resources/graphics/manual_images/basic_rules_1.png')
+
+    return manual
 end

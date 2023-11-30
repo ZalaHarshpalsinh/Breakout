@@ -13,8 +13,8 @@ function Ball:init()
     self.dy = 0
 
     --set ball's dimentions
-    self.width = TILE_WIDTH/2
-    self.height = TILE_HEIGHT/2
+    self.width = TILE_WIDTH*SCALE_X/2
+    self.height = TILE_HEIGHT*SCALE_Y/2
 
     --select the skin (color) of the ball rendomly out of 7 options
     self.skin = math.random(1,7)
@@ -47,7 +47,7 @@ end
 function Ball:render()
 
     --draw the ball using the main texture and the quad of the current skin
-    love.graphics.draw(gTextures['main'],gQuads['balls'][self.skin],self.x,self.y)
+    love.graphics.draw(gTextures['main'],gQuads['balls'][self.skin],self.x,self.y,0,SCALE_X,SCALE_Y)
 end
 
 

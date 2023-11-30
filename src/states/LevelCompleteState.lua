@@ -23,7 +23,8 @@ function LevelCompleteState:update(dt)
             {
                 ['extra_balls'] = math.random(5,10),
                 ['key'] = #bricks/2
-            }
+            },
+            active_bricks = #bricks
         })
     end
     if love.keyboard.wasPressed('escape') then
@@ -33,7 +34,7 @@ end
 
 function LevelCompleteState:render()
     print('Level '..self.level..' Complete','large',0,VIRTUAL_HEIGHT/3,VIRTUAL_WIDTH,'center')
-    print('Press enter','medium',0,VIRTUAL_HEIGHT/3+60,VIRTUAL_WIDTH,'center')
+    print('Press enter','medium',0,VIRTUAL_HEIGHT/3+420,VIRTUAL_WIDTH,'center')
     self.paddle:render()
     renderHealth(self.health)
     renderScore(self.score)

@@ -32,18 +32,18 @@ function Brick:init(x,y,skin,tier)
     self.y = y
     self.skin = skin
     self.tier = tier
-    self.width = 2 * TILE_WIDTH
-    self.height = TILE_HEIGHT
+    self.width = 2 * TILE_WIDTH * SCALE_X
+    self.height = TILE_HEIGHT * SCALE_Y
     self.destroyed = false
     self.locked = false
 
     self.particle_system = love.graphics.newParticleSystem(gTextures['particle'],20)
 
-    self.particle_system:setEmissionArea('normal',10,10)
+    self.particle_system:setEmissionArea('normal',10*SCALE_X,10*SCALE_Y)
 
     self.particle_system:setParticleLifetime(1,2)
 
-    self.particle_system:setLinearAcceleration(-20,50,20,100)
+    self.particle_system:setLinearAcceleration(-20*SCALE_X,50*SCALE_Y,20*SCALE_X,100*SCALE_Y)
 end
 
 function Brick:update(dt)
@@ -55,9 +55,9 @@ function Brick:render()
 
     if not self.destroyed then
         local index = self.locked==false and ((self.skin-1)*4 + self.tier) or #gQuads['bricks']
-        love.graphics.draw(gTextures['main'],gQuads['bricks'][index],self.x,self.y)
+        love.graphics.draw(gTextures['main'],gQuads['bricks'][index],self.x,self.y,0,SCALE_X,SCALE_Y)
     end
-    love.graphics.draw(self.particle_system,self.x+self.width/2,self.y+self.height/2)
+    love.graphics.draw(self.particle_system,self.x+self.width/2,self.y+self.height/2,0,SCALE_X,SCALE_Y)
 
 end
 
