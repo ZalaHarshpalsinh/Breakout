@@ -235,10 +235,17 @@ end
 function GenerateImagesManual()
     local manual =
     {
-        ['basic_rules'] = {},
+        ['Basic_rules'] = {},
+        ['Controlls'] = {},
+        ['Powerups'] = {}
     }
 
-    manual['basic_rules'][1] = love.graphics.newImage('resources/graphics/manual_images/basic_rules_1.png')
-
+    manual['Basic_rules'][1] = love.graphics.newImage('resources/graphics/manual_images/basic_rules_1.png')
+    manual['Basic_rules'][2] = love.graphics.newImage('resources/graphics/manual_images/basic_rules_2.png')
+    manual['Basic_rules'][3] = love.graphics.newImage('resources/graphics/manual_images/basic_rules_3.png')
+    manual['Basic_rules'][4] = love.graphics.newImage('resources/graphics/manual_images/basic_rules_4.png')
+    
+    manual['Controlls'][1] = love.graphics.newImage('resources/graphics/manual_images/basic_rules_1.png')
+    manual['Powerups'][1] = love.graphics.newImage('resources/graphics/manual_images/basic_rules_1.png')
     return manual
 end

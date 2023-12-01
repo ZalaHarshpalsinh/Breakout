@@ -91,7 +91,7 @@ function love.load()
     love.keyboard.keysPressed = {}
     love.keyboard.pressedAlphabet = nil
 
-    gSounds['music']:play()
+    -- gSounds['music']:play()
     gSounds['music']:setLooping(true)
 end
 

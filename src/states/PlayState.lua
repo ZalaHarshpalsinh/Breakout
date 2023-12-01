@@ -223,7 +223,7 @@ function PlayState:render()
 
     --if game is paused, display Pause text
     if self.paused then
-        print('PAUSED','large',0,VIRTUAL_HEIGHT/2-112,VIRTUAL_WIDTH,'center')
+        -- print('PAUSED','large',0,VIRTUAL_HEIGHT/2-112,VIRTUAL_WIDTH,'center')
     end
 end
 

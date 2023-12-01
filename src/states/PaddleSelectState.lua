@@ -28,8 +28,8 @@ function PaddleSelectState:update(dt)
         gStateMachine:change('ServeState',{
             paddle = Paddle(self.currentPaddle),
             bricks = bricks,
-            health = 1,
-            score = 100,
+            health = 3,
+            score = 0,
             level = 1,
             hits_count = 0,
             hits_target = 
