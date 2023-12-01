@@ -23,6 +23,7 @@ end
 function GameOverState:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         if self.is_new_high_score then
+            gSounds['high-score']:play()
             gStateMachine:change('EnterHighScoreState',{
                 new_score = self.score,
                 new_score_index = self.highscore_index,
@@ -30,11 +31,13 @@ function GameOverState:update(dt)
             })
         else
             gStateMachine:change('StartState')
+            gSounds['confirm']:play()
         end
     end
 
     if love.keyboard.wasPressed('escape') then
         gStateMachine:change('StartState')
+        gSounds['back']:play()
     end
 end
 

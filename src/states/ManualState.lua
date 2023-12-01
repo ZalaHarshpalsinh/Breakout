@@ -23,17 +23,20 @@ end
 function ManualState:update(dt)
     if love.keyboard.wasPressed('left') then
         if self.current_page==1 then
-
+            gSounds['no-select']:play()
         else
+            gSounds['select']:play()
             self.current_page = self.current_page - 1
         end
     elseif love.keyboard.wasPressed('right') then
         if self.current_page==#self.pages then
-            
+            gSounds['no-select']:play()
         else
+            gSounds['select']:play()
             self.current_page = self.current_page + 1
         end
     elseif love.keyboard.wasPressed('escape') then
+        gSounds['back']:play()
         gStateMachine:change('StartState')
     end
 end

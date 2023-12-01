@@ -31,6 +31,7 @@ function ServeState:update(dt)
             active_bricks = self.active_bricks
         })
     elseif love.keyboard.wasPressed('escape') then
+        gSounds['back']:play()
         gStateMachine:change('StartState')
     end
 end

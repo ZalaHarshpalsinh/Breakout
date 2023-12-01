@@ -63,6 +63,9 @@ end
 
 function Brick:hit()
 
+    gSounds['brick-hit-2']:stop()
+    gSounds['brick-hit-2']:play()
+
     self.particle_system:setColors(
         paletteColors[self.skin]['r']/255,
         paletteColors[self.skin]['g']/255,
@@ -82,5 +85,10 @@ function Brick:hit()
         if self.skin == 0 then
             self.destroyed = true
         end
+    end
+
+    if self.destroyed then
+        gSounds['brick-hit-1']:stop()
+        gSounds['brick-hit-1']:play()
     end
 end

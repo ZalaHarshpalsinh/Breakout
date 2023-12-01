@@ -7,22 +7,29 @@ end
 function PaddleSelectState:update(dt)
     if love.keyboard.wasPressed('left') then
         if self.currentPaddle ~= 1 then
+            gSounds['select']:play()
             self.currentPaddle = self.currentPaddle - 1
+        else
+            gSounds['error']:play()
         end
     elseif love.keyboard.wasPressed('right') then
         if self.currentPaddle ~= 4 then
+            gSounds['select']:play()
             self.currentPaddle = self.currentPaddle + 1
+        else
+            gSounds['error']:play()
         end
     end
 
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
 
+        gSounds['confirm']:play()
         local bricks = LevelMaker.createMap(1)
         gStateMachine:change('ServeState',{
             paddle = Paddle(self.currentPaddle),
             bricks = bricks,
-            health = 3,
-            score = 0,
+            health = 1,
+            score = 100,
             level = 1,
             hits_count = 0,
             hits_target = 
@@ -33,6 +40,7 @@ function PaddleSelectState:update(dt)
             active_bricks = #bricks
         })
     elseif love.keyboard.wasPressed('escape') then
+        gSounds['back']:play()
         gStateMachine:change('StartState')
     end
 end

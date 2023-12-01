@@ -33,14 +33,17 @@ function Ball:update(dt)
     if self.x <=0 then
         self.x=0
         self.dx = -self.dx
+        gSounds['wall-hit']:play()
     --hit the right edge
     elseif self.x>= (VIRTUAL_WIDTH  - self.width) then
         self.x = VIRTUAL_WIDTH-self.width
         self.dx = -self.dx
+        gSounds['wall-hit']:play()
     --hit the ceiling
     elseif self.y <=0 then
         self.y = 0;
         self.dy = -self.dy
+        gSounds['wall-hit']:play()
     end
 end
 

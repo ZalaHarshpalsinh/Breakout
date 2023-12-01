@@ -7,6 +7,7 @@ end
 
 function HighScoreState:update(dt)
     if love.keyboard.wasPressed('escape') then
+        gSounds['back']:play()
         gStateMachine:change('StartState')
     end
     if love.keyboard.isDown('up') then

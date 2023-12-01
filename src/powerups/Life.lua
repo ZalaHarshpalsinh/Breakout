@@ -17,6 +17,7 @@ end
 
 function Life.cause_effect(playstate)
     if playstate.health ~= 3 then
+        gSounds['recover']:play()
         playstate.health = playstate.health + 1
     end
 end

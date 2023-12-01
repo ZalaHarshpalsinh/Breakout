@@ -26,6 +26,7 @@ end
 
 function Key.cause_effect(playstate)
     if playstate.locked_brick_index~=0 then
+        gSounds['key']:play()
         playstate.bricks[playstate.locked_brick_index].locked = false
         playstate.locked_brick_index = 0
     end

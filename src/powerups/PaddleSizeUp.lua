@@ -19,6 +19,7 @@ end
 
 function PaddleSizeUp.cause_effect(playstate)
     if playstate.paddle.size ~= 4 then
+        gSounds['paddle-size-up']:play()
         playstate.paddle.size = playstate.paddle.size + 1
     end
 end

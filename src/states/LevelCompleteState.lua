@@ -10,6 +10,7 @@ end
 function LevelCompleteState:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
 
+        gSounds['confirm']:play()
         local bricks =  LevelMaker.createMap(self.level+1)
         
         gStateMachine:change('ServeState',{
@@ -28,6 +29,7 @@ function LevelCompleteState:update(dt)
         })
     end
     if love.keyboard.wasPressed('escape') then
+        gSounds['back']:play()
         gStateMachine:change('StartState')
     end
 end

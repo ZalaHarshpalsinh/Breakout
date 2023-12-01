@@ -18,6 +18,9 @@ function ExtraBalls.should_spawn(playstate)
 end
 
 function ExtraBalls.cause_effect(playstate)
+
+    gSounds['extra-balls']:play()
+
     local paddle = playstate.paddle
     
     local ball1 = Ball()

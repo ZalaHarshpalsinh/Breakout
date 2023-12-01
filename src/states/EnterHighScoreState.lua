@@ -21,16 +21,18 @@ function EnterHighScoreState:update(dt)
     if love.keyboard.alphaPressed then
         if #self.name < 20 then
             self.name = self.name .. love.keyboard.pressedAlphabet
+            gSounds['select']:play()
         else
-            --sound
+            gSounds['error']:play()
         end
     end
 
     if love.keyboard.wasPressed('backspace') then
         if #self.name >=1 then
             self.name = self.name:sub(1,-2)
+            gSounds['no-select']:play()
         else
-            --sound
+            gSounds['error']:play()
         end
     end
 
@@ -47,13 +49,15 @@ function EnterHighScoreState:update(dt)
             end
             love.filesystem.write('breakout.lst',new_scores_data)
             gStateMachine:change('StartState')
+            gSounds['confirm']:play()
         else
-            --sound
+            gSounds['error']:play()
         end
     end
 
     if love.keyboard.wasPressed('escape') then
        gStateMachine:change('StartState')
+       gSounds['back']:play()
     end
 end
 

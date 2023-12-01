@@ -20,17 +20,22 @@ function StartState:update(dt)
     --if up key is pressed decrement the option index
     if (love.keyboard.wasPressed('up')) 
     then
+        gSounds['select']:play()
         self.current_option = dec_loop(self.current_option,#self.options)
     end
 
     --if up down is pressed increment the option index
     if(love.keyboard.wasPressed('down'))
     then
+        gSounds['select']:play()
         self.current_option = inc_loop(self.current_option,#self.options)
     end
 
     --If enter is pressed, change the state based on whichever option user selected
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+
+        gSounds['confirm']:play()
+
         if self.current_option == 1 then
             gStateMachine:change('PaddleSelectState')
         elseif self.current_option == 2 then

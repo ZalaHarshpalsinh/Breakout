@@ -60,8 +60,13 @@ function love.load()
         ['hurt'] = love.audio.newSource('resources/sounds/hurt.wav', 'static'),
         ['victory'] = love.audio.newSource('resources/sounds/victory.wav', 'static'),
         ['recover'] = love.audio.newSource('resources/sounds/recover.wav', 'static'),
+        ['key'] = love.audio.newSource('resources/sounds/key.wav', 'static'),
+        ['paddle-size-up'] = love.audio.newSource('resources/sounds/paddle-size-up.wav', 'static'),
+        ['extra-balls'] = love.audio.newSource('resources/sounds/extra-balls.wav', 'static'),
         ['high-score'] = love.audio.newSource('resources/sounds/high_score.wav', 'static'),
         ['pause'] = love.audio.newSource('resources/sounds/pause.wav', 'static'),
+        ['back'] = love.audio.newSource('resources/sounds/back.wav', 'static'),
+        ['error'] = love.audio.newSource('resources/sounds/error.wav', 'static'),
         ['music'] = love.audio.newSource('resources/sounds/music.wav', 'static')
     }
 
@@ -85,6 +90,9 @@ function love.load()
     --a table that is used to keep track of the keys that have been pressed by the user in current frame
     love.keyboard.keysPressed = {}
     love.keyboard.pressedAlphabet = nil
+
+    gSounds['music']:play()
+    gSounds['music']:setLooping(true)
 end
 
 

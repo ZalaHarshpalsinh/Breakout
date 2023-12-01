@@ -59,6 +59,7 @@ function PlayState:update(dt)
 
     --if user pressed space pause/resume the game
     if love.keyboard.wasPressed('space') then
+        gSounds['pause']:play()
         self.paused = not self.paused
     end
     
@@ -75,6 +76,9 @@ function PlayState:update(dt)
 
              --detect collision of ball with paddle
             if collides(ball,self.paddle) then
+
+                gSounds['paddle-hit']:play()
+
                 --bounce the ball in other direction
                 if(ball.y < self.paddle.y+self.paddle.height/2) then
                     ball.dy = - math.abs(ball.dy)
@@ -138,6 +142,8 @@ function PlayState:update(dt)
                     end
                     
                     if(self.active_bricks == 0) then 
+
+                        gSounds['victory']:play()
                         gStateMachine:change('LevelCompleteState',{
                             level = self.level,
                             paddle = self.paddle,
@@ -153,6 +159,7 @@ function PlayState:update(dt)
             if ball.y >= VIRTUAL_HEIGHT then
                 table.remove(self.balls,i)
                 if #self.balls == 0 then
+                    gSounds['hurt']:play()
                     self.health = self.health - 1
                     if self.health == 0 then
                         gStateMachine:change('GameOverState',{
@@ -188,6 +195,7 @@ function PlayState:update(dt)
 
     --if user presses escape take him to menu
     if love.keyboard.wasPressed('escape') then
+        gSounds['back']:play()
         gStateMachine:change('StartState')
     end
 end
