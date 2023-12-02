@@ -245,7 +245,7 @@ function GenerateImagesManual()
     manual['Basic_rules'][3] = love.graphics.newImage('resources/graphics/manual_images/basic_rules_3.png')
     manual['Basic_rules'][4] = love.graphics.newImage('resources/graphics/manual_images/basic_rules_4.png')
     
-    manual['Controlls'][1] = love.graphics.newImage('resources/graphics/manual_images/basic_rules_1.png')
-    manual['Powerups'][1] = love.graphics.newImage('resources/graphics/manual_images/basic_rules_1.png')
+    manual['Controlls'][1] = love.graphics.newImage('resources/graphics/manual_images/controlls_1.png')
+    manual['Powerups'][1] = love.graphics.newImage('resources/graphics/manual_images/powerups_1.png')
     return manual
 end

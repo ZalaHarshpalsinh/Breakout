@@ -58,7 +58,7 @@ end
 function PlayState:update(dt)
 
     --if user pressed space pause/resume the game
-    if love.keyboard.wasPressed('space') then
+    if love.keyboard.wasPressed('p') then
         gSounds['pause']:play()
         self.paused = not self.paused
     end
